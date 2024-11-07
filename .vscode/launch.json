@@ -1,0 +1,36 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug",
+            "cargo": {
+                "args": [
+                    "build",
+                    "--bin=gui-rs",
+                    "--package=gui-rs"
+                ]
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}",
+            "program": "${workspaceFolder}/target/debug/gui-rs"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Release",
+            "cargo": {
+                "args": [
+                    "build",
+                    "--release",
+                    "--bin=gui-rs",
+                    "--package=gui-rs"
+                ]
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}",
+            "program": "${workspaceFolder}/target/release/gui-rs"
+        }
+    ]
+}
