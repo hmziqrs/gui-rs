@@ -1,13 +1,15 @@
-use iced::widget::{button, column, text};
-use iced::{Alignment, Element, Sandbox, Settings};
+use iced::widget::{button, column, text, Column};
+use iced::{Center, Theme};
 
 pub fn main() -> iced::Result {
-    Counter::run(Settings::default())
+    iced::application("A cool counter", Counter::update, Counter::view)
+        .theme(|_| Theme::Dracula)
+        .run()
 }
 
 #[derive(Default)]
 struct Counter {
-    value: i32,
+    value: i64,
 }
 
 #[derive(Debug, Clone, Copy)]
@@ -16,17 +18,7 @@ enum Message {
     Decrement,
 }
 
-impl Sandbox for Counter {
-    type Message = Message;
-
-    fn new() -> Self {
-        Self::default()
-    }
-
-    fn title(&self) -> String {
-        String::from("Counter - Iced")
-    }
-
+impl Counter {
     fn update(&mut self, message: Message) {
         match message {
             Message::Increment => {
@@ -38,14 +30,13 @@ impl Sandbox for Counter {
         }
     }
 
-    fn view(&self) -> Element<Message> {
+    fn view(&self) -> Column<Message> {
         column![
             button("Increment").on_press(Message::Increment),
             text(self.value).size(50),
             button("Decrement").on_press(Message::Decrement)
         ]
-        .padding(20)
-        .align_items(Alignment::Center)
-        .into()
+        .padding(0)
+        .align_x(Center)
     }
 }
